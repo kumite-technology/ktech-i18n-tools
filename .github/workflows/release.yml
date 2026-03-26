@@ -1,0 +1,55 @@
+name: Release Package
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'src/**'
+            - 'package.json'
+            - 'tsconfig.json'
+            - '.github/workflows/release.yml'
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            packages: write
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0 # Needed for tags
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version: '24'
+                  cache: 'yarn'
+
+            - name: Install dependencies
+              run: yarn install --immutable
+
+            - name: Build package
+              run: yarn build
+
+            - name: Bump version (patch)
+              id: version
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  yarn version patch --no-git-tag-version
+                  VERSION=$(node -p "require('./package.json').version")
+                  echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+            - name: Commit and tag version
+              run: |
+                  git add package.json
+                  git commit -m "chore(release): v${{ steps.version.outputs.version }} [skip ci]" || echo "No changes to commit"
+                  git tag v${{ steps.version.outputs.version }}
+                  git push origin main --tags
+
+            - name: Push changes
+              run: git push origin main
