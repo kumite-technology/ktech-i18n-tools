@@ -1,6 +1,6 @@
 {
     "name": "@ktech/i18n-tools",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "private": true,
     "description": "Reusable i18n translation CLI for KTech repositories",
     "type": "module",
