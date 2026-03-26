@@ -14,8 +14,8 @@
         "README.md"
     ],
     "scripts": {
-        "prepare": "tsc -p tsconfig.json",
-        "prepack": "[ ! -f dist/cli.js ] || [ src/cli.ts -nt dist/cli.js ] && tsc -p tsconfig.json || echo 'dist is up to date'",
+        "prepare": "",
+        "prepack": "",
         "build": "tsc -p tsconfig.json",
         "clean": "rm -rf dist",
         "dev": "tsx src/cli.ts",

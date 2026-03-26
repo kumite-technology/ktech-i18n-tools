@@ -47,6 +47,7 @@ jobs:
             - name: Commit and tag version
               run: |
                   git add package.json
+                  git add dist
                   git commit -m "chore(release): v${{ steps.version.outputs.version }} [skip ci]" || echo "No changes to commit"
                   git tag v${{ steps.version.outputs.version }}
                   git push origin main --tags
