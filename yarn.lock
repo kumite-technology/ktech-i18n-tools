@@ -215,7 +215,7 @@ __metadata:
     typescript: "npm:^5.8.3"
   bin:
     ktech-i18n-translate: dist/cli.js
-    ktech-i18n-translate-docs: dist/translateDocs.js
+    ktech-i18n-translate-docs: dist/cli-docs.js
   languageName: unknown
   linkType: soft
 
