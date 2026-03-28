@@ -1,6 +1,12 @@
 name: Release Package
 
 on:
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: 'Branch to translate and commit to'
+                required: true
+                default: 'main'
     push:
         branches:
             - main
