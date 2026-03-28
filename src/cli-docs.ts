@@ -42,7 +42,11 @@ async function loadLocales(localesConfigPath: string): Promise<string[]> {
 
 async function main(): Promise<void> {
     const args = parseArgs(process.argv.slice(2));
-    if (!args.files.length || !args.localesConfig) {
+    if (!args.files.length) {
+        console.log('No files specified. Nothing to translate.');
+        process.exit(0);
+    }
+    if (!args.localesConfig) {
         printUsage();
         process.exit(1);
     }
