@@ -18,7 +18,10 @@ function parseArgs(argv) {
             continue;
         }
     }
-    return args;
+    return {
+        files: args.files.filter(Boolean),
+        localesConfig: args.localesConfig,
+    };
 }
 function printUsage() {
     console.log(`\nUsage:\n  ktech-i18n-translate-docs <file1.mdx|glob> <file2.mdx|glob> --locales-config <path>\n\nRequired:\n  <file.mdx|glob>         MDX file(s) or glob(s) to translate\n  --locales-config        JSON file with locale array (e.g. [\"fr\",\"de\"])\n\nEnvironment:\n  OPENAI_API_KEY\n  OPENAI_TRANSLATION_PROMPT_ID\n`);

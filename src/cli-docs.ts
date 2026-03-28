@@ -25,7 +25,10 @@ function parseArgs(argv: string[]): CliArgs {
             continue;
         }
     }
-    return args;
+    return {
+        files: args.files.filter(Boolean),
+        localesConfig: args.localesConfig,
+    };
 }
 
 function printUsage(): void {
